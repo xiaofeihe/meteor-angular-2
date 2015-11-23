@@ -1,0 +1,40 @@
+<a class="btn-floating btn-large waves-effect waves-light  light-green right float-add-button" (click)="openModal()">
+    <i class="material-icons">
+        edit
+    </i>
+</a>
+
+<!-- Modal Structure -->
+<div id="modal2" class="modal">
+
+    <form>
+        <div class="modal-content">
+            <h4>Edit</h4>
+
+            <div class="row">
+                <div class="input-field col s6" *ng-if="party">
+                    <input type="text" [(ng-model)]="party.name" id="name">
+                    <label class="active" for="name">Name</label>
+                </div>
+                <div class="input-field col s6" *ng-if="party">
+                    <input type="text" [(ng-model)]="party.location" id="location">
+                    <label class="active" for="location">Location</label>
+                </div>
+                <div class="input-field col s12" *ng-if="party">
+                    <input type="text" [(ng-model)]="party.description" id="description">
+                    <label class="active" for="description">Description</label>
+                </div>
+                <div class="input-field col s12" *ng-if="party">
+                    <input type="checkbox" [(ng-model)]="party.public" id="public">
+                    <label class="active" for="public">public</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="update()">Save</button>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </form>
+
+</div>

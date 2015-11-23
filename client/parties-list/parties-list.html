@@ -1,0 +1,28 @@
+<nav class="top-nav custom-top-nav indigo darken-1">
+    <div class="container">
+        <div class="nav-wrapper"><a class="page-title">Parties List</a></div>
+    </div>
+</nav>
+
+<div class="relative-container container">
+    
+    <parties-form></parties-form>
+    
+    <span *ng-for="#page of pagination.arrayPages">
+        <a (click)="changePage(page)">{{page}}</a>
+    </span>
+
+    <ul class="collection">
+        
+        <div *ng-if="party">
+            
+        PARTY: {{party.name}} th epart
+        </div>
+        
+        <li class="collection-item avatar" *ng-for="#party of parties">
+            <party-item [item]="party"></party-item>ff
+        </li>
+
+    </ul>
+
+</div>

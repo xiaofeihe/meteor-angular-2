@@ -1,0 +1,16 @@
+<span class="title">      
+    <a [router-link]="['/PartyDetails', {id: item._id}]" 
+       class="indigo-text text-darken-1"> {{item.name}} </a>
+</span>
+<p>
+    {{item.location}}
+    <br>
+    {{item.description}}
+</p>
+<span class="secondary-content">
+    <div class="chip ">
+        {{partyStatus}}
+    </div>
+    <a [router-link]="['/PartyDetails', {id: item._id}]" class="indigo-text text-darken-1"><i
+            class="material-icons">trending_flat</i></a>
+</span>

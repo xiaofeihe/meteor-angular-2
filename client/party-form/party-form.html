@@ -1,0 +1,47 @@
+<!-- Modal Trigger -->
+<a class="btn-floating btn-large waves-effect waves-light light-green right float-add-button" (click)="openModal()">
+    <i class="material-icons">add</i>
+</a>
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+    <form [ng-form-model]="newParty" #f="form" (submit)="submitCreateParty(f.value)">
+        <div class="modal-content indigo darken-1">
+
+            <p class="flow-text white-text">Create a new party</p>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" ng-control="name" id="name" class="white-text">
+                    <label for="name" class="white-text">Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input type="text" ng-control="location" id="location" class="white-text">
+                    <label for="location" class="white-text">Location</label>
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" ng-control="description" id="description" class="white-text">
+                    <label for="description" class="white-text">Description</label>
+                </div>
+                <div class="input-field col s12">
+                    <input type="checkbox" ng-control="public" id="public" class="white-text">
+                    <label for="public" class="white-text">public</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer indigo darken-3">
+            <button class="modal-action modal-close waves-effect waves-green btn-flat white-text">Save</button>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat white-text ">Close</a>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+<nav class="top-nav custom-top-nav indigo darken-1">
+    <div class="container">
+        <div class="nav-wrapper" *ng-if="party"><a class="page-title">Party: {{party.name}}</a></div>
+    </div>
+</nav>
+
+<div class="container relative-container" *ng-if="party">
+    <ul class="collection">
+        <li class="collection-item">
+            Name: {{party.name}}
+        </li>
+        <li class="collection-item">
+            Description: {{party.description}}
+        </li>
+        <li class="collection-item">
+            Location: {{party.location}}
+        </li>
+        <li class="collection-item">
+            Status: {{partyStatus}}
+        </li>
+    </ul>
+
+    <party-edit id="{{party._id}}"></party-edit>
+    
+    <a class="btn-floating btn-large waves-effect waves-light red right add-button-sec" 
+       (click)="deleteConfirmation()">
+        <i class="material-icons">
+            info_outline
+        </i>
+    </a>
+    
+    <a [router-link]="['/PartiesList']" 
+       class="btn-floating btn-large waves-effect waves-light indigo darken-4 right add-button-third">
+        <i class="material-icons">
+            view_list
+        </i>
+    </a>
+
+
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal3" class="modal" *ng-if="party">
+    <div class="modal-content">
+        <h4>Delete {{party.name}}</h4>
+        <p>Are you sure that you want to delete {{party.name}} party ?</p>
+    </div>
+    <div class="modal-footer">
+        <button class=" modal-action modal-close waves-effect waves-green btn-flat" (click)="deleteParty()">
+            Agree
+        </button>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+          

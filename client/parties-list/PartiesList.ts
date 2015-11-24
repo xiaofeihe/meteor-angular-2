@@ -40,7 +40,7 @@ export class PartiesList extends MeteorComponent {
         currentPage: 1,
         items: 0,
         totalPages: 0,
-        arrayPages: [1, 2, 3, 4]
+        arrayPages: []
     };
 
     public constructor(PartiesService:PartiesService) {
@@ -115,6 +115,13 @@ export class PartiesList extends MeteorComponent {
 
     public onDestroy() {
         this.subscription.stop();
+    }
+
+    public isCurrentPage(page: number): string{
+        if(page == this.pagination.currentPage) {
+            return 'active';
+        }
+        return 'waves-effect';
     }
 
 }

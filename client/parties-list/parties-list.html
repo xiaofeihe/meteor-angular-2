@@ -8,10 +8,14 @@
     
     <parties-form></parties-form>
     
-    <span *ng-for="#page of pagination.arrayPages">
-        <a (click)="changePage(page)">{{page}}</a>
-    </span>
-
+    <ul class="pagination" *ng-if="pagination.arrayPages">
+        <li class="{{isCurrentPage(page)}}" *ng-for="#page of pagination.arrayPages">
+            <a (click)="changePage(page)">{{page}}</a>
+        </li>
+    </ul>
+    
+    <span> 10 item per page </span>
+    
     <ul class="collection">
         
         <div *ng-if="party">

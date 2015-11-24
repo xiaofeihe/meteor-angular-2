@@ -67,6 +67,8 @@ export class PartyDetails extends MeteorComponent {
         element.closeModal();
         this.router.navigate(['/PartiesList']);
     }
+    
+    
 }
 
 

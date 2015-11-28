@@ -29,13 +29,16 @@ export class PartiesList extends MeteorComponent {
 
     public pageTitle:string;
     public parties:Mongo.Cursor<any>;
-    public party;
 
     private service:PartiesService;
 
     private subscription;
 
-    public pagination: {perPage: number, currentPage: number, items: number, totalPages: number, arrayPages: number[]} = {
+    private searchValue:any = "";
+
+    private typing;
+
+    public pagination:{perPage: number, currentPage: number, items: number, totalPages: number, arrayPages: number[]} = {
         perPage: 10,
         currentPage: 1,
         items: 0,
@@ -69,6 +72,35 @@ export class PartiesList extends MeteorComponent {
 
     }
 
+    public searchBindingStart(search:string):void {
+
+        clearTimeout(this.typing);
+        this.typing = setTimeout(()=> {
+            console.log(search);
+            this.searchValue = search;
+            this.pagination.currentPage = 1;
+            this.meteorSubscribe();
+        }, 1000);
+
+    }
+
+    public searchBindingStop():void {
+        clearTimeout(this.typing);
+    }
+
+    public isCurrentPage(page:number):string {
+        if (page == this.pagination.currentPage) {
+            return 'active';
+        }
+        return 'waves-effect';
+    }
+
+    public onDestroy() {
+        if (this.subscription) {
+            this.subscription.stop();
+        }
+    }
+
     private meteorSubscribe():void {
 
         if (this.subscription) {
@@ -78,16 +110,20 @@ export class PartiesList extends MeteorComponent {
         this.subscription = Meteor.subscribe('parties', {
             limit: this.pagination.perPage,
             skip: this.pagination.currentPage * this.pagination.perPage - this.pagination.perPage
-        }, true);
+        }, this.searchValue, ()=> {
+            
+        });
 
         this.autorun(()=> {
             this.parties = Parties.find();
-        }, true);
 
-        Meteor.call('partiesCount',
-            (error:any, results:any)=> {
+            Meteor.call('partiesCount', this.searchValue, (error:any, results:any)=> {
 
-                let totalPages: number = Math.ceil(results / this.pagination.perPage);
+                if(error){
+                    console.log(error);
+                }
+
+                let totalPages:number = Math.ceil(results / this.pagination.perPage);
 
                 var pages:number[] = [];
 
@@ -98,30 +134,21 @@ export class PartiesList extends MeteorComponent {
                 this.pagination.arrayPages = pages;
 
                 this.pagination = {
-                    perPage: 10,
+                    perPage: this.pagination.perPage,
                     currentPage: this.pagination.currentPage,
                     items: results,
                     totalPages: Math.ceil(results / this.pagination.perPage),
                     arrayPages: pages
                 };
+            });
+        }, true);
 
-            }
-        )
+
     }
+    
 
     private setUpPageDetails():void {
         this.pageTitle = 'List Of Parties';
-    }
-
-    public onDestroy() {
-        this.subscription.stop();
-    }
-
-    public isCurrentPage(page: number): string{
-        if(page == this.pagination.currentPage) {
-            return 'active';
-        }
-        return 'waves-effect';
     }
 
 }

@@ -17,7 +17,9 @@ export class PartiesService {
             location: newParty.location,
             public: newParty.public
         }, (error)=> {
-            console.log(error);
+            if (error){
+                console.log(error);
+            }
         })
     }
 

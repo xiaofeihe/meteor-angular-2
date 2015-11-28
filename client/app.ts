@@ -22,7 +22,8 @@ import {PartyDetails} from 'client/party-details/PartyDetails';
 })
 
 @RouteConfig([
-    {path: '/', as: 'PartiesList', component: PartiesList},
+    {path: '/', redirectTo: '/parties'},
+    {path: '/parties', as: 'PartiesList', component: PartiesList},
     {path: '/party/:id', as: 'PartyDetails', component: PartyDetails}
 ])
 

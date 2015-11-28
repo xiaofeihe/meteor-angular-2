@@ -9,22 +9,20 @@
     <parties-form></parties-form>
     
     <ul class="pagination" *ng-if="pagination.arrayPages">
-        <li class="{{isCurrentPage(page)}}" *ng-for="#page of pagination.arrayPages">
-            <a (click)="changePage(page)">{{page}}</a>
+        <li class="{{isCurrentPage(page)}}" *ng-for="#page of pagination.arrayPages" (click)="changePage(page)">
+            <a >{{page}}</a>
         </li>
     </ul>
+
+    <div class="input-field col s6">
+        <input type="text" [(ng-model)]="search" id="search" (keyup)="searchBindingStart(search)" (keydown)="searchBindingStop()">
+        <label for="search">Search</label>
+    </div>
     
-    <span> 10 item per page </span>
-    
-    <ul class="collection">
-        
-        <div *ng-if="party">
-            
-        PARTY: {{party.name}} th epart
-        </div>
+    <ul class="collection" *ng-if="parties">
         
         <li class="collection-item avatar" *ng-for="#party of parties">
-            <party-item [item]="party"></party-item>ff
+            <party-item [item]="party"></party-item>
         </li>
 
     </ul>
